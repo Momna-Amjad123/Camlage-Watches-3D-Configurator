@@ -251,8 +251,10 @@ visits.
 ## Getting Started
 
 ```bash
-git clone https://github.com/[your-username]/[your-repo].git
-cd [your-repo]
+git clone https://github.com/[Momna-Amjad123]/[Camlage-Watches-3D-Configurator
+].git
+cd [Camlage-Watches-3D-Configurator
+]
 npm install
 npm run dev
 ```
