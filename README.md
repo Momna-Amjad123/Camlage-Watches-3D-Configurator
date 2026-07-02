@@ -6,9 +6,9 @@
 | | |
 |---|---|
 | **Student Name** | Momna Amjad  |
-| **Roll Number** | [23010101-010] |
+| **Roll Number** | 23010101-010 |
 | **Student Name** | Wajeeha Qadri  |
-| **Roll Number** | [087] |
+| **Roll Number** | 087 |
 | **Instructor** | Museb Khalid |
 
 ---
@@ -251,10 +251,8 @@ visits.
 ## Getting Started
 
 ```bash
-git clone https://github.com/[Momna-Amjad123]/[Camlage-Watches-3D-Configurator
-].git
-cd [Camlage-Watches-3D-Configurator
-]
+git clone https://github.com/Momna-Amjad123/Camlage-Watches-3D-Configurator.git
+cd Camlage-Watches-3D-Configurator
 npm install
 npm run dev
 ```
