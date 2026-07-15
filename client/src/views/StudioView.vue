@@ -3,13 +3,13 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ColorSwatch from '../components/ColorSwatch.vue'
 import WatchModel3D from '../components/WatchModel3D.vue'
-import { globalState, products } from '../store.js'
+import { globalState } from '../store.js'
 
 const route = useRoute()
 const router = useRouter()
 
 const currentProduct = computed(() => {
-  return products.find(p => p.id === route.params.id) || products[0]
+  return globalState.products.find(p => p._id === route.params.id) || globalState.products[0] || {}
 })
 
 const caseColors = [
@@ -30,13 +30,12 @@ const activeStrap = ref(strapColors[0])
 const setCase = (color) => { activeCase.value = color }
 const setStrap = (color) => { activeStrap.value = color }
 
-const addCustomToCart = () => {
-  const customizedItem = {
-    ...currentProduct.value,
-    customizedColor: `${activeCase.value.name} case, ${activeStrap.value.name} strap`,
-    price: currentProduct.value.price
+const addCustomToCart = async () => {
+  if (!globalState.user) {
+    router.push('/login')
+    return
   }
-  globalState.addToCart(customizedItem)
+  await globalState.addToCart(currentProduct.value._id, activeStrap.value.name, activeCase.value.name)
   router.push('/cart')
 }
 </script>
@@ -45,7 +44,7 @@ const addCustomToCart = () => {
   <section class="min-h-screen pt-12 pb-12 px-6 max-w-[90rem] mx-auto flex flex-col md:flex-row gap-12 items-center">
 
     <div class="w-full md:w-3/5 h-[560px] relative bg-[#050505] border border-white/10 overflow-hidden">
-      <WatchModel3D :case-color="activeCase.hex" :strap-color="activeStrap.hex" />
+      <WatchModel3D :case-color="activeCase.hex" :strap-color="activeStrap.hex" :product-name="currentProduct.name" />
       <div class="absolute top-6 left-6 text-xs tracking-widest text-gray-500">
         Drag to rotate
       </div>

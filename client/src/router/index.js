@@ -6,6 +6,7 @@ import GalleryView from '../views/GalleryView.vue'
 import CartView from '../views/CartView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
+import OrdersView from '../views/OrdersView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +17,8 @@ const router = createRouter({
     { path: '/gallery', component: GalleryView },
     { path: '/cart', component: CartView },
     { path: '/login', component: LoginView },
-    { path: '/signup', component: SignupView }
+    { path: '/signup', component: SignupView },
+    { path: '/orders', component: OrdersView }
   ],
   scrollBehavior() {
     return { top: 0 }

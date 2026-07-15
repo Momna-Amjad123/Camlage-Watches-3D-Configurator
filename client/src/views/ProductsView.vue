@@ -1,17 +1,17 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
-import { globalState, products } from '../store.js'
+import { globalState } from '../store.js'
 
 const activeFilter = ref('All')
 const filters = ['All', 'Dress', 'Sport']
 
 const filtered = computed(() => {
-  if (activeFilter.value === 'All') return products
-  return products.filter(p => p.category === activeFilter.value)
+  if (activeFilter.value === 'All') return globalState.products
+  return globalState.products.filter(p => p.category === activeFilter.value)
 })
 
-const handleAddToCart = (product) => globalState.addToCart(product)
+const handleAddToCart = (product) => globalState.addToCart(product._id, null, null)
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const handleAddToCart = (product) => globalState.addToCart(product)
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <ProductCard
         v-for="item in filtered"
-        :key="item.id"
+        :key="item._id"
         :product="item"
         @add-to-cart="handleAddToCart"
       />

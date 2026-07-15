@@ -1,7 +1,11 @@
 <script setup>
+import { onMounted } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import ToastNotifier from './components/ToastNotifier.vue'
+import { globalState } from './store.js'
+
+onMounted(() => globalState.fetchProducts())
 </script>
 
 <template>

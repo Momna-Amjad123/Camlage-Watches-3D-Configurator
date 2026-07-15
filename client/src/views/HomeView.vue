@@ -1,21 +1,21 @@
 <script setup>
 import { computed } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
-import { globalState, products } from '../store.js'
+import { globalState } from '../store.js'
 
-const featured = computed(() => products.slice(0, 4))
-const addToCart = (p) => globalState.addToCart(p)
+const featured = computed(() => globalState.products.slice(0, 4))
+const addToCart = (p) => globalState.addToCart(p._id, null, null)
 </script>
 
 <template>
   <div>
     <!-- Hero -->
-    <section class="relative h-[85vh] flex items-center overflow-hidden">
+    <section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover opacity-25">
         <div class="absolute inset-0 bg-gradient-to-r from-camlage-black via-camlage-black/70 to-transparent"></div>
       </div>
-      <div class="relative z-10 px-6 md:px-16 max-w-2xl">
+      <div class="relative z-10 px-6 md:px-16 max-w-2xl text-center flex flex-col items-center">
         <p class="text-[#c9a24b] font-display italic text-lg mb-4">Camlage Watches</p>
         <h1 class="text-5xl md:text-7xl font-display font-semibold leading-tight mb-6">
           Build a watch<br>that's yours
@@ -51,7 +51,7 @@ const addToCart = (p) => globalState.addToCart(p)
         <router-link to="/products" class="text-sm text-gray-400 hover:text-white">View all &rarr;</router-link>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <ProductCard v-for="p in featured" :key="p.id" :product="p" @add-to-cart="addToCart" />
+        <ProductCard v-for="p in featured" :key="p._id" :product="p" @add-to-cart="addToCart" />
       </div>
     </section>
 
