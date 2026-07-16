@@ -17,12 +17,18 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB error:', err))
 
-// Routes (we'll create these next steps)
+// Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/cart', cartRoutes)
 
 app.get('/', (req, res) => res.send('Camlage API running'))
 
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`))
+// Only start a listening server when running locally.
+// On Vercel, the platform imports and calls `app` directly as a serverless function.
+if (process.env.VERCEL !== '1') {
+  const PORT = process.env.PORT || 5000
+  app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`))
+}
+
+export default app
